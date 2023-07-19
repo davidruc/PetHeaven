@@ -20,9 +20,6 @@ Se generará una base de datos que contiene usuarios, información de la mascota
 
 ![DiagramaER](./diagramaER.png)
 
-
-
-
-
 Petopia buscará darle solución a una problemática real surgiente en una empresa de bucaramanga.
 
+ 
