@@ -59,3 +59,4 @@ CREATE TABLE seguimiento(
     FOREIGN KEY (fk_mascota) REFERENCES mascota(id_mascota)
 );
 
+ALTER TABLE especie AUTO_INCREMENT = 2
