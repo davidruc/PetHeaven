@@ -1,9 +1,32 @@
 import { Router } from "express";
 import proxyEspecie from "./../middleware/middleware_especie.js"
 import mysql from "mysql2";
+import { SignJWT, jwtVerify } from 'jose';
+import { signedCookie, signedCookies } from "cookie-parser";
 
 let con = undefined;
 const routerEspecie = Router();
+
+routerEspecie.use("/:id?", async (req, res, next) => {
+    try {  
+        const encoder = new TextEncoder(); 
+        console.log(encoder);
+        const jwtconstructor = new SignJWT(req.params);
+        console.log(jwtconstructor);
+        const jwt = await jwtconstructor 
+            .setProtectedHeader({ alg: "HS256", typ: "JWT" })
+            .setIssuedAt()
+            .setExpirationTime("20s")
+            .sign(encoder.encode(process.env.JWT_PRIVATE_KEY));
+        console.log(jwt);
+        res.cookie('especie', jwt , {httpOnly : true});
+        console.log(req.cookies);
+        next();
+    } catch (err) {
+        console.error('Error al generar el JWT:', err.message);
+        res.sendStatus(500);
+    }
+});
 
 routerEspecie.use((req,res,next)=>{
     let myConfig = JSON.parse(process.env.MY_CONNECT);
@@ -11,9 +34,19 @@ routerEspecie.use((req,res,next)=>{
     next();
 });
 
-routerEspecie.get("/:id?", proxyEspecie, (req, res)=>{
-    let sql = (req.params.id)
-    ? [`SELECT * FROM especie WHERE id_especie = ?`, req.params.id]
+routerEspecie.get("/:id?", proxyEspecie, async(req, res)=>{
+    console.log("en mi funcion get ");
+    const jwt = req.cookies.especie; 
+
+    const encoder = new TextEncoder();  
+    const jwtData = await jwtVerify(
+        jwt,
+        encoder.encode(process.env.JWT_PRIVATE_KEY)
+    )
+    console.log(jwtData);
+
+    let sql = (jwtData.payload.id)
+    ? [`SELECT * FROM especie WHERE id_especie = ?`, jwtData.payload.id]
     : [`SELECT * FROM especie`];
     con.query(...sql, (err, data)=>{
         if(err){
@@ -23,6 +56,7 @@ routerEspecie.get("/:id?", proxyEspecie, (req, res)=>{
             res.send(data);
         }
     })
+    
 })
 routerEspecie.post("/", proxyEspecie,  (req,res)=>{
     con.query(`INSERT INTO especie SET ?`, req.body, (err,info)=>{

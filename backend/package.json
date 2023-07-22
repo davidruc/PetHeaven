@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Se instaloron diferentes dependencias para la creacion de una API para el proyecto PETHEAVEN, dependencias para validación de datos, dependencias para conexión a base de datos y dependencias para la creación de JWT y cookies",
-  "main": "index.js",
+  "main": "app.js",
   "type": "module",
   "scripts": {
     "dev": "nodemon --quiet ./src/app.js",
