@@ -9,22 +9,20 @@ import { jwtVerify } from "jose";
 const proxyEspecie = express();
 proxyEspecie.use(async(req, res, next)=>{
     try{
-        const jwt = req.cookies.especie;
+        //La entrada de los datos debe ser el mismo de la sesión por lo que se cambia el req.cookies ya que si no se hace de esta forma genera conflicto con la persistencia de las cookies.
+        const jwt = req.session.jwt;
         const encoder = new TextEncoder();
         const jwtData = await jwtVerify(
             jwt,
             encoder.encode(process.env.JWT_PRIVATE_KEY)
-        )    
-        if (jwtData.payload) {
-            let parametro = plainToClass(parametros, jwtData.payload, {excludeExtraneousValues: true})
+            )
+        if (jwtData.payload.params.id) {
+            let parametro = plainToClass(parametros, jwtData.payload.params, {excludeExtraneousValues: true})
             await validate(parametro);
-            console.log("entramos a parámetros", parametro);
         }
         if (req.method === 'POST' || req.method === 'PUT'){
-            console.log(req.method);
-            let data = plainToClass(Especie, jwtData.payload, {excludeExtraneousValues: true});
+            let data = plainToClass(Especie, jwtData.payload.body, {excludeExtraneousValues: true});
             await validate(data);
-            console.log(data);
         }
         next();
     } catch(err) {
