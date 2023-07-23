@@ -6,6 +6,7 @@ import routerEspecie from "./routes/especie.js";
 import routerRaza from "./routes/raza.js";
 import routerAfiliacion from "./routes/tipo_afiliacion.js";
 import routerEstadoPlan from "./routes/estado_plan.js";
+import routerUsuario from "./routes/usuario.js";
 
 dotenv.config();
 const appExpress = express();
@@ -17,6 +18,7 @@ appExpress.use("/especie", routerEspecie);
 appExpress.use("/raza", routerRaza);
 appExpress.use("/afiliacion", routerAfiliacion);
 appExpress.use("/estadoPlan", routerEstadoPlan);
+appExpress.use("/usuario", routerUsuario);
 
 const config = JSON.parse(process.env.MY_CONFIG);
 appExpress.listen(config, ()=>console.log(`http://${config.hostname}:${config.port}`))

@@ -29,9 +29,11 @@ CREATE TABLE tipo_afiliacion(
 CREATE TABLE usuario(
     id_usuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     nombre_usuario VARCHAR(255) NOT NULL,
-    telefono_contacto TINYINT(10) NOT NULL,
-    documento TINYINT(20) NOT NULL
+    telefono_contacto INT(20) NOT NULL,
+    documento INT(20) NOT NULL
 );
+
+
 CREATE TABLE plan(
     id_plan INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     fecha_afiliacion TIMESTAMP NOT NULL,
