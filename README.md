@@ -4,6 +4,17 @@
 
 Petopia es un proyecto que busca darle solución a una funeraria que tiene el servicio de velar a una mascota mediante diferentes modalidades. El proyecto estará enfocado en crear únicamente el backend y generar los endpoints de que se consideren necesarios para el momento de conectarlo con el frond end. 
 
+## Tabla de contenido 
+
+- [Objetivos](#objetivos)
+    - [objetivo general](#objetivo-general)
+    - [objetivos especificos](#objetivos-específicos)
+- [Diagrama MER](#diagrama-mer-de-la-base-de-datos)
+- [base de datos](#construcción-de-la-base-de-datos)
+
+
+
+# OBJETIVOS:
 ## Objetivo General
 
 Petopia tiene como objetivo general sistematizar el manejo de datos de una funeraria enfocado en todo lo referente a afiliación y velación mascotas. 
