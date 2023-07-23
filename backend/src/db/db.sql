@@ -1,5 +1,6 @@
 CREATE DATABASE petheaven;
 USE petheaven;
+
 CREATE TABLE especie(
     id_especie INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     nombre_especie VARCHAR(25) NOT NULL

@@ -10,6 +10,7 @@ import routerUsuario from "./routes/usuario.js";
 import routerPlan from "./routes/plan.js";
 import routerMascota from "./routes/mascota.js";
 import routerProcedimiento from "./routes/procedimiento.js";
+import routerSeguimiento from "./routes/seguimiento.js";
 
 dotenv.config();
 const appExpress = express();
@@ -25,6 +26,7 @@ appExpress.use("/usuario", routerUsuario);
 appExpress.use("/plan", routerPlan);
 appExpress.use("/mascota", routerMascota);
 appExpress.use("/procedimiento", routerProcedimiento);
+appExpress.use("/seguimiento", routerSeguimiento);
 
 const config = JSON.parse(process.env.MY_CONFIG);
 appExpress.listen(config, ()=>console.log(`http://${config.hostname}:${config.port}`))
