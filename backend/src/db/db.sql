@@ -12,12 +12,9 @@ CREATE TABLE raza(
 );
 CREATE TABLE procedimiento(
     id_procedimiento_mascota INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    fecha_inicio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_final_apreciada TIMESTAMP NOT NULL,
     name_procedimiento VARCHAR(50) NOT NULL,
     detalles VARCHAR(255)
 );
-
 CREATE TABLE estado_plan(
     id_estado INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     estado VARCHAR(15) NOT NULL
@@ -32,8 +29,6 @@ CREATE TABLE usuario(
     telefono_contacto INT(20) NOT NULL,
     documento INT(20) NOT NULL
 );
-
-
 CREATE TABLE plan(
     id_plan INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     fecha_afiliacion TIMESTAMP NOT NULL,
@@ -57,8 +52,8 @@ CREATE TABLE seguimiento(
     id_seguimiento_mascota INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     fk_procedimiento INT NOT NULL, 
     fk_mascota INT NOT NULL,
+    fecha_inicio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_final_apreciada TIMESTAMP NOT NULL,
     FOREIGN KEY (fk_procedimiento) REFERENCES procedimiento(id_procedimiento_mascota),
     FOREIGN KEY (fk_mascota) REFERENCES mascota(id_mascota)
 );
-
-ALTER TABLE especie AUTO_INCREMENT = 2
