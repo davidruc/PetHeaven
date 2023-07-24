@@ -1,5 +1,5 @@
 CREATE DATABASE petheaven;
-USE petheaven;
+USE petheaven; 
 CREATE TABLE especie(
     id_especie INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     nombre_especie VARCHAR(25) NOT NULL
@@ -29,7 +29,6 @@ CREATE TABLE usuario(
     telefono_contacto INT NOT NULL,
     documento INT NOT NULL
 );
-
 CREATE TABLE plan(
     id_plan INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     fecha_afiliacion TIMESTAMP NOT NULL,
@@ -81,8 +80,9 @@ INSERT INTO procedimiento (name_procedimiento, detalles) VALUES
 ('Entrega al dueño', 'Entrega del cuerpo del animal fallecido al dueño para su despedida.');
 INSERT INTO estado_plan (estado) VALUES
 ('Activo'),
-('Inactivo'),
-('Pendiente');
+('Suspendido'),
+('Pendiente'),
+('Finalizado');
 INSERT INTO tipo_afiliacion (plan_usuario) VALUES
 ('Básico'),
 ('Premium'),
@@ -96,9 +96,9 @@ INSERT INTO usuario (nombre_usuario, telefono_contacto, documento) VALUES
 ('Ana Rodríguez', 310987654, 23456789),
 ('Luisa Martínez', 320876543, 87654321),
 ('Carlos Sánchez', 301234567, 34567890);
-
 INSERT INTO mascota (nombre_mascota, edad_mascota, fk_dueño, fk_raza) VALUES
 ('Rocky', 3, 1, 1),
+('Boris', 6, 1, 1),
 ('Luna', 5, 2, 2),
 ('Max', 2, 3, 3),
 ('Bella', 4, 4, 4),
@@ -119,4 +119,9 @@ INSERT INTO seguimiento (fk_procedimiento, fk_mascota, fecha_inicio, fecha_final
 (3, 6, '2023-07-29 11:30:00', '2023-07-28 14:15:00'),
 (2, 5, '2023-08-01 12:00:00', '2023-08-02 11:20:00');
 
+SELECT plan.id_plan AS "id", usuario.nombre_usuario AS "usuario", tipo_afiliacion.plan_usuario AS "plan", estado_plan.estado AS "estado", plan.fecha_afiliacion AS "fecha_inicio", (SELECT COUNT(*) FROM mascota WHERE mascota.fk_dueño = usuario.id_usuario) AS "Numero_mascotas" FROM plan INNER JOIN usuario ON plan.fk_usuario = usuario.id_usuario INNER JOIN estado_plan ON plan.fk_estado_plan = estado_plan.id_estado INNER JOIN tipo_afiliacion ON plan.fk_tipo_afiliacion = tipo_afiliacion.id_afiliacion WHERE fk_usuario = 1;
 
+SELECT u.id_usuario, u.nombre_usuario, COUNT(p.fk_usuario) AS cantidad_mascotas
+FROM usuario u
+LEFT JOIN plan p ON u.id_usuario = p.fk_usuario
+GROUP BY u.id_usuario, u.nombre_usuario;

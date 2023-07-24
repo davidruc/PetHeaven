@@ -44,8 +44,8 @@ Se realizaron un par de modificaciones frente al diagrama MER en el transcurso d
 
 En esta sección se mostrarán las consultas específicas que se proponen crear en el actual proyecto.
 
-1. EndPoint que permita traer un usuario por su id y que muestre el nombre de la mascota, su edad y su raza.
-2. EndPoint que permita traer un usuario por su id y que muestre todos sus planes, el estado del plan y cuál plan es. Además tiene que mostrar a que mascota corresponde cada plan. 
+1. EndPoint que permita traer un usuario por su id y que muestre el nombre de todas las mascotas que tenga afiliadas con su edad y su raza.
+2. EndPoint que permita traer un usuario por su id y que muestre todos sus planes, el estado del plan y cuál plan es. Además dice cuantas mascotas tiene afiliadas esta persona. 
 3. EndPoint que permita todo el proceso de seguimiento de una mascota de un usuario en específico. Se ingresa el id de la mascota, pero la consulta debe mostrar el nombre del dueño, el estado del plan y el plan adquirido. 
 4. EndPoint que si al insertar un registro en la tabla seguimiento este es la entrega de las cenizas al usuario (en la data suministrada es el id = 6), el estado del plan del usuario se actualice automáticamente a finalizado.   
 
@@ -55,31 +55,31 @@ En esta sección se mostrarán las consultas específicas que se proponen crear 
 **CRUD DE LAS TABLAS**
 Los siguiente endPoints corresponden a los CRUDs de cada tabla. Para estos endPoints se pueden realizar las consultas básicas, get, get by id, post, put y delete. La entrada de los datos está encriptada usando JWT y cookies. Además se cuenta con un middleware que permite la validación de los datos antes de que ingresen para evitar consumir recursos innecesarios y evitar problemas con el ingreso de la data en la base de datos.  
 
-* Tabla especie:
+* EndPoint CRUD de la Tabla especie:
 *http://${config.hostname}:${config.port}/especie*
 
-* Tabla raza: 
+* EndPoint CRUD de la Tabla raza: 
 *http://${config.hostname}:${config.port}/raza*
 
-* Tabla mascota:
+* EndPoint CRUD de la Tabla mascota:
 *http://${config.hostname}:${config.port}/mascota*
 
-* Tabla usuario: 
+* EndPoint CRUD de la Tabla usuario: 
 *http://${config.hostname}:${config.port}/usuario*
 
-* Tabla estado_plan:
+* EndPoint CRUD de la Tabla estado_plan:
 *http://${config.hostname}:${config.port}/estadoPlan*
 
-* Tabla tipo_afiliacion: 
+* EndPoint CRUD de la Tabla tipo_afiliacion: 
 *http://${config.hostname}:${config.port}/afiliacion*
 
-* Tabla plan: 
+* EndPoint CRUD de la Tabla plan: 
 *http://${config.hostname}:${config.port}/plan*
 
-* Tabla procedimiento: 
+* EndPoint CRUD de la Tabla procedimiento: 
 *http://${config.hostname}:${config.port}/procedimiento*
 
-* Tabla seguimiento: 
+* EndPoint CRUD de la Tabla seguimiento: 
 *http://${config.hostname}:${config.port}/seguimiento*
 
 Para realizar las diferentes consultas ir la herramienta de su elección (ya sea postMan, ThunderClient o el navegador) y seleccione el método que va a utilizar, ya sea GET, POST, PUT o UPDATE. En el caso del GET, se puede realizar un GET ALL o un GET BY id, para el segundo solo hay que agregarle un slash y el id que deseamos /:id. En le put o el delete también es necesario agregar el id de registro que deseamos actualizar o eliminar.
@@ -87,7 +87,12 @@ Para realizar las diferentes consultas ir la herramienta de su elección (ya sea
 
 **EndPoints Planteados en CONSULTAS**
 
-1. 
+1. Para solucionar esta primera consulta (*traer usuarios por id y mostrar todos los perros que tiene afiliados*) se generó el siguiente endpoint: 
+    * method "GET":  *http://${config.hostname}:${config.port}/UsuarioMascotas/:id?*
+
+Si no se ingresa el id trae una lista de todas las mascotas con información de su dueño e información más detallada.
+
+2.  
 
 
 ## Instrucciones para la instalación del proyecto:
@@ -113,7 +118,6 @@ De esta forma verá que la carpeta "*node_modules*" y el archivo "*package-lock.
     * El nombre de la base de datos que ejecutará más adelante es "petheaven", por lo que en el campo database puede ingresar este nombre.
     * En el campo de MY_CONFIG ingrese un hostname y un puerto a su elección. Recuerde que por defecto el local host requiere que el host name es 127.0.0.1. 
     * Verifique que el puerto que va a utilizar no esté en uso. Para evitar confisión mate todos los puertos que tiene abiertos en su máquina.
-
     * Por último la llave privada del JWT puede ser cualquier cadena de texto a su elección.
 
 5. Una vez configuradas las dependencias del proyecto y definidas las variables de entorno sigue ejecutar la base de datos.
@@ -127,7 +131,8 @@ De esta forma verá que la carpeta "*node_modules*" y el archivo "*package-lock.
 ```bash
     npm run dev
 ``` 
-    Una vez levantado el servidor podrá utilizar una herramienta como Thunder-cliente o postman para realizar y verificar los endPoints generados y explicados anteriormente.
+
+Una vez levantado el servidor podrá utilizar una herramienta como Thunder-cliente o postman para realizar y verificar los endPoints generados y explicados anteriormente.
 
 ## Tecnologías
 
