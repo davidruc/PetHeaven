@@ -11,6 +11,8 @@ Petopia es un proyecto que busca darle solución a una funeraria que tiene el se
     - [objetivos especificos](#objetivos-específicos)
 - [Diagrama MER](#diagrama-mer-de-la-base-de-datos)
 - [base de datos](#construcción-de-la-base-de-datos)
+- [Consultas específicas planteadas](#consultas-específicas-planteadasteadas)
+- [Instrucciones de instalacion](#instrucciones-para-la-instalación-del-proyecto)
 
 
 
@@ -38,6 +40,56 @@ Se generaró una base de datos que contiene usuarios, información de la mascota
 
 Se realizaron un par de modificaciones frente al diagrama MER en el transcurso de producción del proyecto con el objetivo de adecuar mejor la lógica de la base de datos.
 
+## CONSULTAS específicas planteadas
+
+En esta sección se mostrarán las consultas específicas que se proponen crear en el actual proyecto.
+
+1. EndPoint que permita traer un usuario por su id y que muestre el nombre de la mascota, su edad y su raza.
+2. EndPoint que permita traer un usuario por su id y que muestre todos sus planes, el estado del plan y cuál plan es. Además tiene que mostrar a que mascota corresponde cada plan. 
+3. EndPoint que permita todo el proceso de seguimiento de una mascota de un usuario en específico. Se ingresa el id de la mascota, pero la consulta debe mostrar el nombre del dueño, el estado del plan y el plan adquirido. 
+4. EndPoint que si al insertar un registro en la tabla seguimiento este es la entrega de las cenizas al usuario (en la data suministrada es el id = 6), el estado del plan del usuario se actualice automáticamente a finalizado.   
+
+## Funcionamiento y endPoints.
+
+
+**CRUD DE LAS TABLAS**
+Los siguiente endPoints corresponden a los CRUDs de cada tabla. Para estos endPoints se pueden realizar las consultas básicas, get, get by id, post, put y delete. La entrada de los datos está encriptada usando JWT y cookies. Además se cuenta con un middleware que permite la validación de los datos antes de que ingresen para evitar consumir recursos innecesarios y evitar problemas con el ingreso de la data en la base de datos.  
+
+* Tabla especie:
+*http://${config.hostname}:${config.port}/especie*
+
+* Tabla raza: 
+*http://${config.hostname}:${config.port}/raza*
+
+* Tabla mascota:
+*http://${config.hostname}:${config.port}/mascota*
+
+* Tabla usuario: 
+*http://${config.hostname}:${config.port}/usuario*
+
+* Tabla estado_plan:
+*http://${config.hostname}:${config.port}/estadoPlan*
+
+* Tabla tipo_afiliacion: 
+*http://${config.hostname}:${config.port}/afiliacion*
+
+* Tabla plan: 
+*http://${config.hostname}:${config.port}/plan*
+
+* Tabla procedimiento: 
+*http://${config.hostname}:${config.port}/procedimiento*
+
+* Tabla seguimiento: 
+*http://${config.hostname}:${config.port}/seguimiento*
+
+Para realizar las diferentes consultas ir la herramienta de su elección (ya sea postMan, ThunderClient o el navegador) y seleccione el método que va a utilizar, ya sea GET, POST, PUT o UPDATE. En el caso del GET, se puede realizar un GET ALL o un GET BY id, para el segundo solo hay que agregarle un slash y el id que deseamos /:id. En le put o el delete también es necesario agregar el id de registro que deseamos actualizar o eliminar.
+
+
+**EndPoints Planteados en CONSULTAS**
+
+1. 
+
+
 ## Instrucciones para la instalación del proyecto:
 
 Para la correcta instalación del proyecto siga las siguientes instrucciones: 
@@ -59,20 +111,42 @@ De esta forma verá que la carpeta "*node_modules*" y el archivo "*package-lock.
     * Luego de tener el archivo .env, copie y pegue la estructura que se observa en el .env.example.
     * Ingrese los datos requeridos. En el caso de manejar el proyecto local, el host sería localhost. 
     * El nombre de la base de datos que ejecutará más adelante es "petheaven", por lo que en el campo database puede ingresar este nombre.
-    * En el campo de MY_CONFIG ingrese un hostname y un puerto a su elección. Recuerde que por defecto el local host requiere que el host name comience con 127. 
+    * En el campo de MY_CONFIG ingrese un hostname y un puerto a su elección. Recuerde que por defecto el local host requiere que el host name es 127.0.0.1. 
     * Verifique que el puerto que va a utilizar no esté en uso. Para evitar confisión mate todos los puertos que tiene abiertos en su máquina.
 
     * Por último la llave privada del JWT puede ser cualquier cadena de texto a su elección.
-    
+
 5. Una vez configuradas las dependencias del proyecto y definidas las variables de entorno sigue ejecutar la base de datos.
 *   En este caso está pública para facilidad de la persona que evalúa.  
     * Dirijase a la ruta ./backend/src/db, ahí encontrará el archivo llamado db.sql
     * Para ejecutar este archivo instale la extensión de visual studio code "**MySQL**". Una vez instalada la extensión va a observar en la barra lateral izquiersa un cilindro. Al darle click se abrirá la barra lateral, seleccione el botón **+** ubicado en la parte superior (*add conecction*) y se desplegará una ventana donde se va a poder configurar la extensión para crear la conexión. Por defecto toda la configuración se dirige a una conección local, daremos en el botón de guardar y por último connect.
-    * Si no desea utilizar esta extensión también puede ir ejecutando el script de la base de datos desde la consola. 
-    * La ejecución de la base de datos está en orden.
+    * Si no desea utilizar esta extensión también puede ir ejecutando el script de la base de datos desde la consola usando MySQL. 
+    * El script de la base de datos está en orden, por lo que para su ejecución y para evitar problemas es recomendado que se realice en orden.
 
 6. Cuando ya tenga la base de datos localmente se dirigirá nuevamente a la terminal que había abierto anteriormente y levantará el servidor de manera local usando el siguiente comando: 
 ```bash
     npm run dev
 ``` 
-Una vez levantado el servidor podrá utilizar una herramienta como Thunder-cliente o postman para realizar y verificar los endPoints generados y explicados anteriormente.
+    Una vez levantado el servidor podrá utilizar una herramienta como Thunder-cliente o postman para realizar y verificar los endPoints generados y explicados anteriormente.
+
+## Tecnologías
+
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="50" height="50"/>  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="50" height="50"/>  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="60" height="60"/>  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="60" height="60"/>  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="50" height="50"/> 
+
+## Dependencias utilizadas
+
+Para el presente proyecto se van a utilizar las siguientes dependencias en sus respectivas versiones:
+
+  ```json
+    "class-transformer": "0.5.1",
+    "class-validator": "0.14.0",
+    "cookie-parser": "1.4.6",
+    "dotenv": "16.3.1",
+    "express": "4.18.2",
+    "express-session": "1.17.3",
+    "jose": "4.14.4",
+    "mysql2": "3.5.2",
+    "nodemon": "3.0.1",
+    "reflect-metadata": "0.1.13",
+    "typescript": "5.1.6"
+  ```
