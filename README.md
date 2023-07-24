@@ -11,8 +11,11 @@ Petopia es un proyecto que busca darle solución a una funeraria que tiene el se
     - [objetivos especificos](#objetivos-específicos)
 - [Diagrama MER](#diagrama-mer-de-la-base-de-datos)
 - [base de datos](#construcción-de-la-base-de-datos)
-- [Consultas específicas planteadas](#consultas-específicas-planteadasteadas)
+- [Consultas específicas planteadas](#consultas-específicas-planteadas)
+- [Funcionamiento y endPoints](#funcionamiento-y-endpoints)
 - [Instrucciones de instalacion](#instrucciones-para-la-instalación-del-proyecto)
+- [Tecnologías implementadas](#tecnologías)
+- [Dependencias utilizadas](#dependencias-utilizadas)
 
 
 
