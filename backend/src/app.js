@@ -13,7 +13,7 @@ import routerProcedimiento from "./routes/procedimiento.js";
 import routerSeguimiento from "./routes/seguimiento.js";
 /* Routes Específicas */
 import routerUsuMascotas from "./routes/UsuMas.js";
-
+import routerInfoPlan from "./routes/InfoPlan.js";
 
 dotenv.config();
 const appExpress = express();
@@ -32,6 +32,7 @@ appExpress.use("/procedimiento", routerProcedimiento);
 appExpress.use("/seguimiento", routerSeguimiento);
 /* EndPoints específicos */
 appExpress.use("/UsuarioMascotas", routerUsuMascotas);
+appExpress.use("/infoPlan", routerInfoPlan);
 
 
 const config = JSON.parse(process.env.MY_CONFIG);
