@@ -108,7 +108,8 @@ En este endPoint no se vió necesario usar middleware ni JWT ya que no se ingres
 
 No es 100% necesario ingresar el id en el endPoint porque existen circunstancias donde se desea ver todo el historial de todas las mascotas y por lo tanto se deja opcional en el endPoint.
 
-5. 
+5. Para este endPoint no se generó un router nuevo, simplemente se modificó el CRUD de seguimiento, y se agregó un condicional que permite modificar automáticamente la tabla de plan al poner el último procedimiento que es la entrega de cenizas. 
+(Queda pendiente hacerle un condicional adicional que es que si la persona tiene más de una mascota este estado no se modifique).
 
 
 ## Instrucciones para la instalación del proyecto:

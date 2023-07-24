@@ -119,3 +119,4 @@ INSERT INTO seguimiento (fk_procedimiento, fk_mascota, fecha_inicio, fecha_final
 (5, 1, '2023-07-29 11:30:00', '2023-07-28 14:15:00'),
 (6, 1, '2023-08-01 12:00:00', '2023-08-02 11:20:00');
 
+SELECT fk_dueño FROM mascota WHERE id_mascota = 2;

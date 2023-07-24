@@ -65,7 +65,30 @@ routerSeguimiento.post("/", proxySeguimiento, async (req,res)=>{
             console.error("error insertando datos en seguimientoes", err.message);
             res.status(err.status)
         } else {
-            res.send(info)
+            if(jwtData.payload.body.fk_procedimiento === 6){
+                con.query(`SELECT fk_dueño FROM mascota WHERE id_mascota = ?`, jwtData.payload.body.fk_mascota, (err, info2)=>{
+                    if(err){
+                        console.error("error trayendo los datos", err.message);
+                        res.status(err.status)
+                    } else {
+                            const fk_estado_plan = 4;
+                            const datos = {fk_estado_plan};
+                            const dueño = info2[0].fk_dueño;
+                            con.query(`UPDATE plan SET ? WHERE fk_usuario = ?`, [datos, dueño], (err, info3)=>{
+                                if(err){
+                                    console.error("error actualizando los datos", err.message);
+                                    res.status(err.status)
+                                } else {
+                                    res.send(info3)
+                                }
+                            })
+                        }
+                    })
+                
+                
+            } else {
+                res.send(info)
+            }
         }
     })
 })
