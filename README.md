@@ -46,8 +46,9 @@ En esta sección se mostrarán las consultas específicas que se proponen crear 
 
 1. EndPoint que permita traer un usuario por su id y que muestre el nombre de todas las mascotas que tenga afiliadas con su edad y su raza.
 2. EndPoint que permita traer un usuario por su id y que muestre todos sus planes, el estado del plan y cuál plan es. Además dice cuantas mascotas tiene afiliadas esta persona. 
-3. EndPoint que permita todo el proceso de seguimiento de una mascota de un usuario en específico. Se ingresa el id de la mascota, pero la consulta debe mostrar el nombre del dueño, el estado del plan y el plan adquirido. 
-4. EndPoint que si al insertar un registro en la tabla seguimiento este es la entrega de las cenizas al usuario (en la data suministrada es el id = 6), el estado del plan del usuario se actualice automáticamente a finalizado.   
+3. EndPoint que traiga información de contacto de los usuarios que tienen su plan en mora, el endpoint va a traer el nombre de una de las mascotas y el número de contacto.
+4. EndPoint que permita todo el proceso de seguimiento de una mascota de un usuario en específico. Se ingresa el id de la mascota, pero la consulta debe mostrar el nombre del dueño, el estado del plan y el plan adquirido. 
+5. EndPoint que si al insertar un registro en la tabla seguimiento este es la entrega de las cenizas al usuario (en la data suministrada es el id = 6), el estado del plan del usuario se actualice automáticamente a finalizado.   
 
 ## Funcionamiento y endPoints.
 
@@ -92,8 +93,17 @@ Para realizar las diferentes consultas ir la herramienta de su elección (ya sea
 
 Si no se ingresa el id trae una lista de todas las mascotas con información de su dueño e información más detallada.
 
-2.  
+2. En este segundo endPoint se trajeron los detalles del plan, el plan y el estado de dicho plan, además trae el número de mascotas que tiene el dueño. 
+    * method "GET":  *http://${config.hostname}:${config.port}/infoPlan/:id?*
 
+Si no se ingresa el id trae una lista de todos los dueños con su respectivos planes.
+
+3. Este tercer endPoint trae toda la información de contacto de los usuarios en los que su estado de plan está en mora o pendiente (en el caso de los datos de entrada en la base de datos son los que tienen un id_estado = 3).
+    * method "GET": *http://${config.hostname}:${config.port}/usuariosMora*
+
+En este endPoint no se vió necesario usar middleware ni JWT ya que no se ingresaba ningún dato, únicamente se mostraban. 
+
+4. 
 
 ## Instrucciones para la instalación del proyecto:
 

@@ -108,20 +108,14 @@ INSERT INTO plan (fecha_afiliacion, fk_estado_plan, fk_tipo_afiliacion, fk_usuar
 ('2023-07-15 08:30:00', 1, 1, 1),
 ('2023-07-20 11:45:00', 2, 2, 2),
 ('2023-07-25 14:00:00', 1, 3, 3),
-('2023-07-30 16:15:00', 2, 2, 4),
-('2023-08-02 09:30:00', 1, 1, 5),
+('2023-07-30 16:15:00', 3, 2, 4),
+('2023-08-02 09:30:00', 3, 1, 5),
 ('2023-08-10 12:45:00', 2, 3, 6);
 INSERT INTO seguimiento (fk_procedimiento, fk_mascota, fecha_inicio, fecha_final_apreciada) VALUES
 (1, 1, '2023-07-15 10:00:00', '2023-07-30 12:00:00'),
-(2, 3, '2023-07-20 09:30:00', '2023-08-15 10:30:00'),
-(3, 2, '2023-07-25 14:15:00', '2023-07-25 15:45:00'),
-(1, 4, '2023-07-28 08:45:00', '2023-08-10 09:00:00'),
-(3, 6, '2023-07-29 11:30:00', '2023-07-28 14:15:00'),
-(2, 5, '2023-08-01 12:00:00', '2023-08-02 11:20:00');
+(2, 1, '2023-07-20 09:30:00', '2023-08-15 10:30:00'),
+(3, 1, '2023-07-25 14:15:00', '2023-07-25 15:45:00'),
+(4, 1, '2023-07-28 08:45:00', '2023-08-10 09:00:00'),
+(5, 1, '2023-07-29 11:30:00', '2023-07-28 14:15:00'),
+(6, 1, '2023-08-01 12:00:00', '2023-08-02 11:20:00');
 
-SELECT plan.id_plan AS "id", usuario.nombre_usuario AS "usuario", tipo_afiliacion.plan_usuario AS "plan", estado_plan.estado AS "estado", plan.fecha_afiliacion AS "fecha_inicio", (SELECT COUNT(*) FROM mascota WHERE mascota.fk_dueño = usuario.id_usuario) AS "Numero_mascotas" FROM plan INNER JOIN usuario ON plan.fk_usuario = usuario.id_usuario INNER JOIN estado_plan ON plan.fk_estado_plan = estado_plan.id_estado INNER JOIN tipo_afiliacion ON plan.fk_tipo_afiliacion = tipo_afiliacion.id_afiliacion WHERE fk_usuario = 1;
-
-SELECT u.id_usuario, u.nombre_usuario, COUNT(p.fk_usuario) AS cantidad_mascotas
-FROM usuario u
-LEFT JOIN plan p ON u.id_usuario = p.fk_usuario
-GROUP BY u.id_usuario, u.nombre_usuario;
