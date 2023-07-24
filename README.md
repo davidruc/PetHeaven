@@ -103,7 +103,13 @@ Si no se ingresa el id trae una lista de todos los dueños con su respectivos pl
 
 En este endPoint no se vió necesario usar middleware ni JWT ya que no se ingresaba ningún dato, únicamente se mostraban. 
 
-4. 
+4. Este endPoint trae un seguimiento detallado de una mascota en específico. En la data suministrada en el script de la base de datos se envía el registro completo de una sola mascota (la mascota con id = 1). Esto con dos objetivos. El primero, es dar a entender que no todas las mascotas ingresadas en la base de datos tienen un seguimiento, ya que pueden estar vivas y por lo tanto no tiene sentido tener este seguimiento. El segundo, para poder observar con mayor claridad la importancia de la información suministrada.
+    * method "GET": *http://${config.hostname}:${config.port}/seguimientoMascotas/:id?*
+
+No es 100% necesario ingresar el id en el endPoint porque existen circunstancias donde se desea ver todo el historial de todas las mascotas y por lo tanto se deja opcional en el endPoint.
+
+5. 
+
 
 ## Instrucciones para la instalación del proyecto:
 
