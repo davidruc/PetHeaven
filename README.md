@@ -63,10 +63,9 @@ Los siguiente endPoints corresponden a los CRUDs de cada tabla. Para estos endPo
 * El parámetro id es opcional en todos los endPoints de CRUDS
 
 * EndPoint CRUD de la Tabla especie:
-  - [GET](/api/especie/:id?)
-  - [POST](/api/especie/:id?)
-  - [PUT](/api/especie/:id?)
-  - [DELETE](/api/especie/:id?)
+    ```http
+    ALL /api/especie/:id?
+    ```
 
 * EndPoint CRUD de la Tabla raza: 
     ```http
