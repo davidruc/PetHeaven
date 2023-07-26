@@ -63,49 +63,49 @@ Los siguiente endPoints corresponden a los CRUDs de cada tabla. Para estos endPo
 * El parámetro id es opcional en todos los endPoints de CRUDS
 
 * EndPoint CRUD de la Tabla especie:
-```http
-ALL /api/especie/:id?
-```
+    ```http
+    ALL /api/especie/:id?
+    ```
 
 * EndPoint CRUD de la Tabla raza: 
-```http
-ALL /api/raza/:id?
-```
+    ```http
+    ALL /api/raza/:id?
+    ```
 
 * EndPoint CRUD de la Tabla mascota:
-```http
-ALL /api/mascota/:id?
-```
+    ```http
+    ALL /api/mascota/:id?
+    ```
 
 * EndPoint CRUD de la Tabla usuario:
-```http
-ALL /api/usuario/:id?
-``` 
+    ```http
+    ALL /api/usuario/:id?
+    ``` 
 
 * EndPoint CRUD de la Tabla estado_plan:
-```http
-ALL /api/estadoPlan/:id?
-```
+    ```http
+    ALL /api/estadoPlan/:id?
+    ```
 
 * EndPoint CRUD de la Tabla tipo_afiliacion: 
-```http
-ALL /api/afiliacion/:id?
-```
+    ```http
+    ALL /api/afiliacion/:id?
+    ```
 
 * EndPoint CRUD de la Tabla plan: 
-```http
-ALL /api/plan/:id?
-```
+    ```http
+    ALL /api/plan/:id?
+    ```
 
 * EndPoint CRUD de la Tabla procedimiento: 
-```http
-ALL /api/procedimiento/:id?
-```
+    ```http
+    ALL /api/procedimiento/:id?
+    ```
 
 * EndPoint CRUD de la Tabla seguimiento: 
-```http
-ALL /api/seguimiento/:id?
-```
+    ```http
+    ALL /api/seguimiento/:id?
+    ```
 
 Para realizar las diferentes consultas ir la herramienta de su elección (ya sea postMan, ThunderClient o el navegador) y seleccione el método que va a utilizar, ya sea GET, POST, PUT o UPDATE. En el caso del GET, se puede realizar un GET ALL o un GET BY id, para el segundo solo hay que agregarle un slash y el id que deseamos /:id. En le put o el delete también es necesario agregar el id de registro que deseamos actualizar o eliminar.
 
@@ -189,9 +189,9 @@ De esta forma verá que la carpeta "*node_modules*" y el archivo "*package-lock.
 
 - Generación: Una vez ejecutado el anterior comando, dirijase a la herramienta que va a utilizar (recomendada Thunder client de visual studio code). 
     * Seleccione el método get e ingrese el siguiente endPoint
-```http
-   GET /token 
-```
+    ```http
+    GET /token 
+    ```
 - Utilización: El endPoint anterior es el que va a generar el token. Tome ese token (solo el valor, sin comillas ni corchetes) y dirijase al apartado de HEADERS, agrege el header/Autorization y en el valor ingrese el token suministrado anteriormente.
 
 Este token tiene un limite de 1h, en ese rango de tiempo podremos acceder a las rutas y endPoints de nuestra Api. Una vez pasada esta hora será necesario generar uno nuevo.
