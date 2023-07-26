@@ -55,36 +55,57 @@ En esta sección se mostrarán las consultas específicas que se proponen crear 
 
 ## Funcionamiento y endPoints.
 
-
 **CRUD DE LAS TABLAS**
 Los siguiente endPoints corresponden a los CRUDs de cada tabla. Para estos endPoints se pueden realizar las consultas básicas, get, get by id, post, put y delete. La entrada de los datos está encriptada usando JWT y cookies. Además se cuenta con un middleware que permite la validación de los datos antes de que ingresen para evitar consumir recursos innecesarios y evitar problemas con el ingreso de la data en la base de datos.  
 
+* ALL significa que todos los métodos HTTP pueden ser utilizados en este endPoint. 
+* Todo lo que va detrás del /api/ es la configuración del hostname y port que se imprime en la consola. Ejemplo: http://${config.hostname}:${config.port}/api/raza/:id? una vez configuradas mis variables de entorno podría verse así: *http://127.21.25.23:5060/api/raza/:id?*. 
+* El parámetro id es opcional en todos los endPoints de CRUDS
+
 * EndPoint CRUD de la Tabla especie:
-*http://${config.hostname}:${config.port}/especie*
+```http
+ALL /api/especie/:id?
+```
 
 * EndPoint CRUD de la Tabla raza: 
-*http://${config.hostname}:${config.port}/raza*
+```http
+ALL /api/raza/:id?
+```
 
 * EndPoint CRUD de la Tabla mascota:
-*http://${config.hostname}:${config.port}/mascota*
+```http
+ALL /api/mascota/:id?
+```
 
-* EndPoint CRUD de la Tabla usuario: 
-*http://${config.hostname}:${config.port}/usuario*
+* EndPoint CRUD de la Tabla usuario:
+```http
+ALL /api/usuario/:id?
+``` 
 
 * EndPoint CRUD de la Tabla estado_plan:
-*http://${config.hostname}:${config.port}/estadoPlan*
+```http
+ALL /api/estadoPlan/:id?
+```
 
 * EndPoint CRUD de la Tabla tipo_afiliacion: 
-*http://${config.hostname}:${config.port}/afiliacion*
+```http
+ALL /api/afiliacion/:id?
+```
 
 * EndPoint CRUD de la Tabla plan: 
-*http://${config.hostname}:${config.port}/plan*
+```http
+ALL /api/plan/:id?
+```
 
 * EndPoint CRUD de la Tabla procedimiento: 
-*http://${config.hostname}:${config.port}/procedimiento*
+```http
+ALL /api/procedimiento/:id?
+```
 
 * EndPoint CRUD de la Tabla seguimiento: 
-*http://${config.hostname}:${config.port}/seguimiento*
+```http
+ALL /api/seguimiento/:id?
+```
 
 Para realizar las diferentes consultas ir la herramienta de su elección (ya sea postMan, ThunderClient o el navegador) y seleccione el método que va a utilizar, ya sea GET, POST, PUT o UPDATE. En el caso del GET, se puede realizar un GET ALL o un GET BY id, para el segundo solo hay que agregarle un slash y el id que deseamos /:id. En le put o el delete también es necesario agregar el id de registro que deseamos actualizar o eliminar.
 
@@ -92,28 +113,39 @@ Para realizar las diferentes consultas ir la herramienta de su elección (ya sea
 **EndPoints Planteados en CONSULTAS**
 
 1. Para solucionar esta primera consulta (*traer usuarios por id y mostrar todos los perros que tiene afiliados*) se generó el siguiente endpoint: 
-    * method "GET":  *http://${config.hostname}:${config.port}/UsuarioMascotas/:id?*
+```http
+GET /api/UsuarioMascotas/:id?
+```
 
 Si no se ingresa el id trae una lista de todas las mascotas con información de su dueño e información más detallada.
 
 2. En este segundo endPoint se trajeron los detalles del plan, el plan y el estado de dicho plan, además trae el número de mascotas que tiene el dueño. 
-    * method "GET":  *http://${config.hostname}:${config.port}/infoPlan/:id?*
+```http
+GET /api/infoPlan/:id?
+```
 
 Si no se ingresa el id trae una lista de todos los dueños con su respectivos planes.
 
 3. Este tercer endPoint trae toda la información de contacto de los usuarios en los que su estado de plan está en mora o pendiente (en el caso de los datos de entrada en la base de datos son los que tienen un id_estado = 3).
-    * method "GET": *http://${config.hostname}:${config.port}/usuariosMora*
+```http
+GET /api/usuariosMora
+```
 
-En este endPoint no se vió necesario usar middleware ni JWT ya que no se ingresaba ningún dato, únicamente se mostraban. 
+En este endPoint no se vió necesario usar middleware para la validación de datos ya que no se ingresaba ningún dato, únicamente se mostraban. 
 
 4. Este endPoint trae un seguimiento detallado de una mascota en específico. En la data suministrada en el script de la base de datos se envía el registro completo de una sola mascota (la mascota con id = 1). Esto con dos objetivos. El primero, es dar a entender que no todas las mascotas ingresadas en la base de datos tienen un seguimiento, ya que pueden estar vivas y por lo tanto no tiene sentido tener este seguimiento. El segundo, para poder observar con mayor claridad la importancia de la información suministrada.
-    * method "GET": *http://${config.hostname}:${config.port}/seguimientoMascotas/:id?*
+```http
+GET /api/seguimientoMascotas/:id?
+```
 
 No es 100% necesario ingresar el id en el endPoint porque existen circunstancias donde se desea ver todo el historial de todas las mascotas y por lo tanto se deja opcional en el endPoint.
 
 5. Para este endPoint no se generó un router nuevo, simplemente se modificó el CRUD de seguimiento, y se agregó un condicional que permite modificar automáticamente la tabla de plan al poner el último procedimiento que es la entrega de cenizas. 
-(Queda pendiente hacerle un condicional adicional que es que si la persona tiene más de una mascota este estado no se modifique).
+```http
+POST /api/seguimiento
+```
 
+*(Queda pendiente hacerle un condicional adicional que es que si la persona tiene más de una mascota este estado no se modifique).*
 
 ## Instrucciones para la instalación del proyecto:
 
@@ -126,7 +158,7 @@ Para la correcta instalación del proyecto siga las siguientes instrucciones:
 ``` 
 3. Una vez la terminal se encuentre en la ruta backend, implemente las dependencias que están en el package.json usando el siguiente comando:
 ```bash
-    npm update
+    npm install
 ``` 
 De esta forma verá que la carpeta "*node_modules*" y el archivo "*package-lock.json*" se crean después de contados segundos. 
 
@@ -151,8 +183,20 @@ De esta forma verá que la carpeta "*node_modules*" y el archivo "*package-lock.
 ```bash
     npm run dev
 ``` 
+**GENERACION DE TOKEN DE ACCESO**
 
-Una vez levantado el servidor podrá utilizar una herramienta como Thunder-cliente o postman para realizar y verificar los endPoints generados y explicados anteriormente.
+7. Antes de empezar a utilizar las diferentes rutas y endPoints debemosos generar un token de acceso. 
+
+- Generación: Una vez ejecutado el anterior comando, dirijase a la herramienta que va a utilizar (recomendada Thunder client de visual studio code). 
+    * Seleccione el método get e ingrese el siguiente endPoint
+```http
+   GET /token 
+```
+- Utilización: El endPoint anterior es el que va a generar el token. Tome ese token (solo el valor, sin comillas ni corchetes) y dirijase al apartado de HEADERS, agrege el header/Autorization y en el valor ingrese el token suministrado anteriormente.
+
+Este token tiene un limite de 1h, en ese rango de tiempo podremos acceder a las rutas y endPoints de nuestra Api. Una vez pasada esta hora será necesario generar uno nuevo.
+
+Una vez levantado el servidor y configurados los headers podrá utilizar una herramienta como Thunder-cliente o postman para realizar y verificar los endPoints generados y explicados anteriormente.
 
 ## Tecnologías
 
