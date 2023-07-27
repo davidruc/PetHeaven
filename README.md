@@ -87,6 +87,8 @@ Este token tiene un limite de 1h, en ese rango de tiempo podremos acceder a las 
 
 Una vez levantado el servidor y configurados los headers podrá utilizar una herramienta como Thunder-cliente o postman para realizar y verificar los endPoints generados y explicados anteriormente.
 
+* En caso de que tenga problemas con la compilación del typescript despliegue una nueva terminar y ejecute el comanto *npm run tsc*.
+
 
 ## Construcción de la base de datos: 
 Se generaró una base de datos que contiene usuarios, información de la mascota, tipo de afiliación e información del proceso en el que se encuentra el tratamiento de la mascota en el momento que fallece y se aplica el plan. A continuación se encuentra el Diagrama de la base de datos final:
