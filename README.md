@@ -62,8 +62,13 @@ De esta forma verá que la carpeta "*node_modules*" y el archivo "*package-lock.
 
     * Dentro de la ruta backend cree un archivo que se llame ".env".
     * Luego de tener el archivo .env, copie y pegue la estructura que se observa en el .env.example.
-    * Ingrese los datos requeridos. En el caso de manejar el proyecto local, el host sería localhost. 
-    * El nombre de la base de datos que ejecutará más adelante es "petheaven", por lo que en el campo database puede ingresar este nombre.
+    * Ingrese los datos requeridos. En el caso de manejar el proyecto local, el host sería:
+            
+            localhost 
+    * El nombre de la base de datos es 
+    
+            petheaven
+    
     * En el campo de MY_CONFIG ingrese un hostname y un puerto a su elección. Recuerde que por defecto el local host requiere que el host name es 
 
             127.0.0.1 
@@ -75,7 +80,7 @@ De esta forma verá que la carpeta "*node_modules*" y el archivo "*package-lock.
     npm run dev
 ```
 
-* En caso de que tenga problemas con la compilación del typescript despliegue una nueva terminar y ejecute el comanto *npm run tsc*.
+* En caso de que tenga problemas con la compilación del typescript despliegue una nueva terminal y ejecute el comanto *npm run tsc*.
 
 
 ## Construcción de la base de datos: 
@@ -112,8 +117,10 @@ Este token tiene un limite de 1h, en ese rango de tiempo podremos acceder a las 
 
 Una vez levantado el servidor y configurados los headers podrá utilizar una herramienta como Thunder-cliente o postman para realizar y verificar los endPoints generados y explicados anteriormente.
 
+Es recomendado también agragarle el la sección de header la configuración de content-type: application-json
 
-**CRUD DE LAS TABLAS**
+**CRUD DE LAS TABLAS:**
+
 Los siguiente endPoints corresponden a los CRUDs de cada tabla. Para estos endPoints se pueden realizar las consultas básicas, get, get by id, post, put y delete. La entrada de los datos está encriptada usando JWT y cookies. Además se cuenta con un middleware que permite la validación de los datos antes de que ingresen para evitar consumir recursos innecesarios y evitar problemas con el ingreso de la data en la base de datos.  
 
 * ALL significa que todos los métodos HTTP pueden ser utilizados en este endPoint. 
@@ -224,7 +231,7 @@ Los siguiente endPoints corresponden a los CRUDs de cada tabla. Para estos endPo
 * EndPoint CRUD de la Tabla seguimiento: 
     ```http
     ALL /api/seguimiento/:id?
-    ``` 
+    ```
     * Los datos para la entrada para este endpoint son los siguiente: 
     ```json
     {
@@ -272,7 +279,15 @@ No es 100% necesario ingresar el id en el endPoint porque existen circunstancias
 ```http
 POST /api/seguimiento
 ```
-* Data para el POST
+* Los datos para la entrada para este endpoint son los siguiente: 
+    ```json
+    {
+        "fk_procedimiento": , /*int*/
+        "fk_mascota": , /*int*/
+        "fecha_final_apreciada":  /*date*/ 
+    }
+    ```
+
 
 *(Queda pendiente hacerle un condicional adicional que es que si la persona tiene más de una mascota este estado no se modifique).*
 
@@ -299,3 +314,5 @@ Para el presente proyecto se van a utilizar las siguientes dependencias en sus r
     "reflect-metadata": "0.1.13",
     "typescript": "5.1.6"
   ```
+
+  **Autor**: David Rueda // campuslands
