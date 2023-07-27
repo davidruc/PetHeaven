@@ -32,20 +32,20 @@ appExpress.get("/token", generateToken, (req,res)=>{
     res.send({token: req.token})
 })
 /* EndPoints CRUD */
-appExpress.use("/especie", validateToken ,routerEspecie);
-appExpress.use("/raza", validateToken ,routerRaza);
-appExpress.use("/afiliacion", validateToken ,routerAfiliacion);
-appExpress.use("/estadoPlan", validateToken ,routerEstadoPlan);
-appExpress.use("/usuario", validateToken ,routerUsuario);
-appExpress.use("/plan", validateToken ,routerPlan);
-appExpress.use("/mascota", validateToken ,routerMascota);
-appExpress.use("/procedimiento", validateToken ,routerProcedimiento);
-appExpress.use("/seguimiento", validateToken ,routerSeguimiento);
+appExpress.use("/api/especie", validateToken ,routerEspecie);
+appExpress.use("/api/raza", validateToken ,routerRaza);
+appExpress.use("/api/afiliacion", validateToken ,routerAfiliacion);
+appExpress.use("/api/estadoPlan", validateToken ,routerEstadoPlan);
+appExpress.use("/api/usuario", validateToken ,routerUsuario);
+appExpress.use("/api/plan", validateToken ,routerPlan);
+appExpress.use("/api/mascota", validateToken ,routerMascota);
+appExpress.use("/api/procedimiento", validateToken ,routerProcedimiento);
+appExpress.use("/api/seguimiento", validateToken ,routerSeguimiento);
 /* EndPoints específicos */
-appExpress.use("/UsuarioMascotas", validateToken ,routerUsuMascotas);
-appExpress.use("/infoPlan", validateToken ,routerInfoPlan);
-appExpress.use("/usuariosMora", validateToken ,routerUsuarioMora);
-appExpress.use("/seguimientoMascotas", validateToken ,routerSegMascota);
+appExpress.use("/api/UsuarioMascotas", validateToken ,routerUsuMascotas);
+appExpress.use("/api/infoPlan", validateToken ,routerInfoPlan);
+appExpress.use("/api/usuariosMora", validateToken ,routerUsuarioMora);
+appExpress.use("/api/seguimientoMascotas", validateToken ,routerSegMascota);
 
 const config = JSON.parse(process.env.MY_CONFIG);
 appExpress.listen(config, ()=>console.log(`http://${config.hostname}:${config.port}`))

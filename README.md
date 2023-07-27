@@ -97,59 +97,145 @@ En esta sección se mostrarán las consultas específicas que se proponen crear 
 
 ## Funcionamiento y endPoints.
 
+**GENERACION DE TOKEN DE ACCESO**
+
+Antes de empezar a utilizar las diferentes rutas y endPoints se debe generar un token de acceso. 
+
+- Generación: Una vez levantado el proyecto localmente, dirijase a la herramienta que va a utilizar (recomendación: Thunder client de visual studio code). 
+    * Seleccione el método get e ingrese el siguiente endPoint
+    ```http
+    GET /token 
+    ```
+- Utilización: El endPoint anterior es el que va a generar el token. Tome ese token (solo el valor, sin comillas ni corchetes) y dirijase al apartado de HEADERS, agrege el header/Autorization y en el valor ingrese el token suministrado anteriormente.
+
+Este token tiene un limite de 1h, en ese rango de tiempo podremos acceder a las rutas y endPoints de nuestra Api. Una vez pasada esta hora será necesario generar uno nuevo.
+
+Una vez levantado el servidor y configurados los headers podrá utilizar una herramienta como Thunder-cliente o postman para realizar y verificar los endPoints generados y explicados anteriormente.
+
+
 **CRUD DE LAS TABLAS**
 Los siguiente endPoints corresponden a los CRUDs de cada tabla. Para estos endPoints se pueden realizar las consultas básicas, get, get by id, post, put y delete. La entrada de los datos está encriptada usando JWT y cookies. Además se cuenta con un middleware que permite la validación de los datos antes de que ingresen para evitar consumir recursos innecesarios y evitar problemas con el ingreso de la data en la base de datos.  
 
 * ALL significa que todos los métodos HTTP pueden ser utilizados en este endPoint. 
-* Todo lo que va detrás del /api/ es la configuración del hostname y port que se imprime en la consola. Ejemplo: http://${config.hostname}:${config.port}/api/raza/:id? una vez configuradas mis variables de entorno podría verse así: *http://127.21.25.23:5060/api/raza/:id?*. 
-* El parámetro id es opcional en todos los endPoints de CRUDS
+* Todo lo que va detrás del /api/ es la configuración del hostname y port que se imprime en la consola. Ejemplo: http://"config.hostname":"config.port"/api/raza/:id? una vez configuradas mis variables de entorno podría verse así: *http://127.21.25.23:5060/api/raza/:id?*. 
+* Todos los nombres para los endpoints con método post o update son tal y como se mostrarán debajo de la ruta. OJO: *hay comentarios para especificar los tipos de datos que deben mandarse, estos comentarios deben eliminarse en caso de generar conflicto con la query*.
+* El parámetro id en el método get es opcional en todos los endPoints de CRUDS
 
 * EndPoint CRUD de la Tabla especie:
     ```http
     ALL /api/especie/:id?
     ```
+    * Los datos para la entrada para este endpoint son los siguiente: 
+    ```json
+    {
+        "nombre_especie": "" /*varchar(25)*/
+    }
+    ```
+    * *Antes de ingresar los datos elimine los comentarios donde se especifica el tipo de dato*
 
 * EndPoint CRUD de la Tabla raza: 
     ```http
     ALL /api/raza/:id?
     ```
-
+    * Los datos para la entrada para este endpoint son los siguiente: 
+    ```json
+    {
+        "nombre_raza": "", /*varchar(25)*/
+        "fk_especie":  /*int */
+    }
+    ```
+    * *Antes de ingresar los datos elimine los comentarios donde se especifica el tipo de dato*
 * EndPoint CRUD de la Tabla mascota:
     ```http
     ALL /api/mascota/:id?
     ```
+    * Los datos para la entrada para este endpoint son los siguiente: 
+    ```json
+    {
+        "nombre_mascota": "", /*varchar(50)*/
+        "edad_mascota": , /* tinyint(2) */
+        "fk_dueño": , /* int */
+        "fk_raza":  /*int */
+    }
+    ```
+    * *Antes de ingresar los datos elimine los comentarios donde se especifica el tipo de dato*
 
 * EndPoint CRUD de la Tabla usuario:
     ```http
     ALL /api/usuario/:id?
     ``` 
-
+    * Los datos para la entrada para este endpoint son los siguiente: 
+    ```json
+    {
+        "nombre_usuario": "", /*varchar(255)*/
+        "telefono_contacto": , /*int*/
+        "documento":  /* int */
+    }
+    ```
+    * *Antes de ingresar los datos elimine los comentarios donde se especifica el tipo de dato*
 * EndPoint CRUD de la Tabla estado_plan:
     ```http
     ALL /api/estadoPlan/:id?
     ```
-
+    * Los datos para la entrada para este endpoint son los siguiente: 
+    ```json
+    {
+        "estado": "" /*varchar(15)*/
+    }
+    ```
+    * *Antes de ingresar los datos elimine los comentarios donde se especifica el tipo de dato*
 * EndPoint CRUD de la Tabla tipo_afiliacion: 
     ```http
     ALL /api/afiliacion/:id?
     ```
+    * Los datos para la entrada para este endpoint son los siguiente: 
+    ```json
+    {
+        "plan_usuario": "" /*varchar(15)*/
+    }
+    ```
+    * *Antes de ingresar los datos elimine los comentarios donde se especifica el tipo de dato*
 
 * EndPoint CRUD de la Tabla plan: 
     ```http
     ALL /api/plan/:id?
     ```
-
+    * Los datos para la entrada para este endpoint son los siguiente: 
+    ```json
+    {
+        "fk_estado_plan": , /*int*/
+        "fk_tipo_afiliacion": , /*int*/
+        "fk_usuario": /*int*/
+    }
+    ```
+    * *Antes de ingresar los datos elimine los comentarios donde se especifica el tipo de dato*
 * EndPoint CRUD de la Tabla procedimiento: 
     ```http
     ALL /api/procedimiento/:id?
     ```
-
+    * Los datos para la entrada para este endpoint son los siguiente: 
+    ```json
+    {
+        "name_procedimiento": , /*varchar(50)*/
+        "detalles":  /*varchar(255)*/ 
+    }
+    ```
+    * *Antes de ingresar los datos elimine los comentarios donde se especifica el tipo de dato*
 * EndPoint CRUD de la Tabla seguimiento: 
     ```http
     ALL /api/seguimiento/:id?
+    ``` 
+    * Los datos para la entrada para este endpoint son los siguiente: 
+    ```json
+    {
+        "fk_procedimiento": , /*int*/
+        "fk_mascota": , /*int*/
+        "fecha_final_apreciada":  /*date*/ 
+    }
     ```
+    * *Antes de ingresar los datos elimine los comentarios donde se especifica el tipo de dato*.
 
-Para realizar las diferentes consultas ir la herramienta de su elección (ya sea postMan, ThunderClient o el navegador) y seleccione el método que va a utilizar, ya sea GET, POST, PUT o UPDATE. En el caso del GET, se puede realizar un GET ALL o un GET BY id, para el segundo solo hay que agregarle un slash y el id que deseamos /:id. En le put o el delete también es necesario agregar el id de registro que deseamos actualizar o eliminar.
+Para realizar las diferentes consultas ir la herramienta de su elección (ya sea postMan, ThunderClient o el navegador) y seleccione el método que va a utilizar, ya sea GET, POST, PUT o UPDATE. En le put o el delete es necesario agregar el id al final del endPoint.
 
 
 **EndPoints Planteados en CONSULTAS**
