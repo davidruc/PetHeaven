@@ -33,7 +33,7 @@ Petopia tiene como objetivo general sistematizar el manejo de datos de una funer
 
 ## Diagrama MER de la base de datos:
 
-![DiagramaER](./img/diagramaER.png)
+![DiagramaER](./uml/diagramaER.png)
 
 
 ## Instrucciones para la instalación del proyecto:
@@ -64,7 +64,9 @@ De esta forma verá que la carpeta "*node_modules*" y el archivo "*package-lock.
     * Luego de tener el archivo .env, copie y pegue la estructura que se observa en el .env.example.
     * Ingrese los datos requeridos. En el caso de manejar el proyecto local, el host sería localhost. 
     * El nombre de la base de datos que ejecutará más adelante es "petheaven", por lo que en el campo database puede ingresar este nombre.
-    * En el campo de MY_CONFIG ingrese un hostname y un puerto a su elección. Recuerde que por defecto el local host requiere que el host name es "127.0.0.1". 
+    * En el campo de MY_CONFIG ingrese un hostname y un puerto a su elección. Recuerde que por defecto el local host requiere que el host name es 
+
+            127.0.0.1 
     * Verifique que el puerto que va a utilizar no esté en uso. Para evitar confisión mate todos los puertos que tiene abiertos en su máquina.
     * Por último la llave privada del JWT puede ser cualquier cadena de texto a su elección.
 
@@ -79,7 +81,7 @@ De esta forma verá que la carpeta "*node_modules*" y el archivo "*package-lock.
 ## Construcción de la base de datos: 
 Se generaró una base de datos que contiene usuarios, información de la mascota, tipo de afiliación e información del proceso en el que se encuentra el tratamiento de la mascota en el momento que fallece y se aplica el plan. A continuación se encuentra el Diagrama de la base de datos final:
 
- ![DiagramaBaseDeDatos](./img/diagramaBaseDeDatos.png)
+ ![DiagramaBaseDeDatos](./uml/diagramaBaseDeDatos.png)
 
 Se realizaron un par de modificaciones frente al diagrama MER en el transcurso de producción del proyecto con el objetivo de adecuar mejor la lógica de la base de datos.
 
@@ -184,6 +186,7 @@ No es 100% necesario ingresar el id en el endPoint porque existen circunstancias
 ```http
 POST /api/seguimiento
 ```
+* Data para el POST
 
 *(Queda pendiente hacerle un condicional adicional que es que si la persona tiene más de una mascota este estado no se modifique).*
 
