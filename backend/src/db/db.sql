@@ -53,7 +53,7 @@ CREATE TABLE seguimiento(
     fk_procedimiento INT NOT NULL, 
     fk_mascota INT NOT NULL,
     fecha_inicio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_final_apreciada TIMESTAMP NOT NULL,
+    fecha_final_apreciada DATE NOT NULL,
     FOREIGN KEY (fk_procedimiento) REFERENCES procedimiento(id_procedimiento_mascota),
     FOREIGN KEY (fk_mascota) REFERENCES mascota(id_mascota)
 );
